@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Triggers Filters Demo
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" , "release/**"]
+    paths:
+     - "src/**" #Solo si cambio algo dentro de src
+     - "tests/**" #Solo si cambia algo dentro de tests
+  pull_request:
+    branches:
+      - main 
+      - release/**
+    paths:
+     - "src/**" #Solo si cambio algo dentro de src
+     - "tests/**" #Solo si cambia algo dentro de tests
+     
+permissions: 
+  contents: read
+
+jobs:
+  # This workflow contains a single job called "build"
+  build-filtrado:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Confirmar que el trigger paso los filtros
+        run: |
+          echo "Branch ${{github.ref_name}}"
+          echo "Evento ${{github.event_name}}"
+          echo "Commit ${{github.sha}}"
