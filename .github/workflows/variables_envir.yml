@@ -29,7 +29,7 @@ jobs:
           SALUDO: "Hola desde el STEP"
         run: echo "SALUDO = $SALUDO"
 
-    demo2-env: 
+  demo2-env: 
       runs-on: ubuntu-latest
 
       steps: 
